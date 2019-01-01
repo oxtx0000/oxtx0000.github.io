@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>人物介绍-drive</title>
+	<link rel="stylesheet" href="css/char-style.css">
+	<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body onload="load()">
+<audio autoplay="autoplay">
+    <source src="audio/日本ACG-Full throttle.mp3" type="audio/mp3" />
+</audio>
+<img class="image" src="images/r-drive.png" alt="drive"/>
+<a href="index_n.html"><img class="text" src="images/t-drive.png" alt="drive"/></a>
+<img class="logo" src="images/l-drive.png" alt="drive"/>
+<div class="slide-container">
+	<div class="wrapper">
+		<div class="clash-card drive">
+			<div class="clash-card__image clash-card__image--rider">
+			</div>
+			<div class="clash-card__unit-name">Drive</div>
+			<div class="clash-card__unit-description">
+				Police officer Shinnosuke Tomari is chosen by an advanced artificial intelligence to become the titular
+				hero Kamen Rider Drive to battle the Roidmudes, androids that wish to usurp humanity as the dominant
+				species on Earth through their ability to slow the passage of time.
+			</div>
+
+			<div class="clash-card__unit-stats clash-card__unit-stats--rider clearfix">
+				<div class="one-third">
+					<div class="stat">2014</div>
+					<div class="stat-value">Year</div>
+				</div>
+
+				<div class="one-third">
+					<div class="stat">19.6m/s</div>
+					<div class="stat-value">Speed</div>
+				</div>
+
+				<div class="one-third no-border">
+					<div class="stat" text-color=blue><a href="javascript:;" onclick="change()"
+														 style="text-decoration:none;">Formula</a></div>
+					<div class="stat-value">Type-change</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+    function load() {
+        $(".logo").fadeIn(1000);
+        $(".image").fadeIn(2000);
+        $(".text").slideDown(3000);
+    }
+
+    function change() {
+        if ($(".image").attr("src") == "images/r-drive.png") {
+            $(".image").attr("src","images/Formula.jpg");
+            $(".image").css("left","-120px");
+        }
+        else {
+            $(".image").attr("src", "images/r-drive.png");
+            $(".image").css("left","-30px");
+        }
+    }
+</script>
+
+</body>
+</html>

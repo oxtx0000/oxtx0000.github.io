@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Character</title>
+
+<link rel="stylesheet" type="text/css" href="css/chars_style.css">
+
+</head>
+<body>
+
+<script src='js/snap.svg-min.js'></script>
+<script type="text/javascript">
+	window.onload = function(argument) {
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+
+	/* svg init */
+	var paper = Snap(w, h);
+
+	var rider = {
+		"build": "E:\\web-projects\\test-site\\images/r-build.png",
+		"kiva": "E:\\web-projects\\test-site\\images/r-kiva.png",
+		"drive": "E:\\web-projects\\test-site\\images/r-drive.png",
+		"faiz": "E:\\web-projects\\test-site\\images/r-faiz.png",
+        "wizard":"E:\\web-projects\\test-site\\images/r-wizard.png"
+	};
+
+	var polygons = [];
+	polygons.push({
+		"coordinates": [
+			[0, 0],
+			[w * 0.6, 0],
+			[0, h * 0.5]
+		],
+		"strokeStyle": "black",
+		"strokeWidth": 10,
+		"image_src": rider.build,
+        "web_src":"char_build.html"
+	}, {
+		"coordinates": [
+			[0, h * 0.5],
+			[w * 0.3, h * 0.25],
+			[w * 0.55, h],
+			[0, h]
+		],
+		"strokeStyle": "black",
+		"strokeWidth": 10,
+		"image_src": rider.faiz
+	}, {
+		"coordinates": [
+			[w * 0.3, h * 0.25],
+			[w * 0.75, h * 0.55],
+			[w * 0.55, h],
+		],
+		"strokeStyle": "black",
+		"strokeWidth": 10,
+		"image_src": rider.drive,
+        "web_src":"char_drive.html"
+	}, {
+		"coordinates": [
+			[w * 0.55, h],
+			[w, 0],
+			[w, h],
+		],
+		"strokeStyle": "black",
+		"strokeWidth": 10,
+		"image_src": rider.wizard
+	}, {
+		"coordinates": [
+			[w * 0.6, 0],
+			[w, 0],
+			[w * 0.75, h * 0.55],
+			[w * 0.3, h * 0.25],
+		],
+		"strokeStyle": "black",
+		"strokeWidth": 10,
+		"image_src": rider.kiva
+	});
+
+	for (var i = 0; i < polygons.length; i++) {
+		make_polygon_layout(paper, polygons[i]);
+	}
+}
+
+
+
+
+function make_polygon_layout() {
+	var paper = arguments[0];
+	var polygon = arguments[1];
+	var tempA = [];
+	for (var i = 0; i < polygon.coordinates.length; i++) {
+		tempA[i] = polygon.coordinates[i];
+	}
+
+	tempA.sort(function(a, b) {
+		return a[0] - b[0];
+	});
+	var sX = tempA[0][0];
+	var bX = tempA[tempA.length - 1][0];
+
+	tempA.sort(function(a, b) {
+		return a[1] - b[1];
+	});
+	var sY = tempA[0][1];
+	var bY = tempA[tempA.length - 1][1];
+
+	polygon.startPoint = [sX, sY];
+	polygon.endPoint = [bX, bY];
+
+	polygon.width = polygon.endPoint[0] - polygon.startPoint[0];
+	polygon.height = polygon.endPoint[1] - polygon.startPoint[1];
+
+	var pattern = paper.image(polygon.image_src, 0, 0, polygon.width, polygon.height)
+		.attr("preserveAspectRatio", "xMidYMid slice")
+		.pattern({
+			'x': polygon.startPoint[0],
+			'y': polygon.startPoint[1],
+			'width': polygon.width,
+			'height': polygon.height
+		}).attr('viewBox', "");
+
+	var path = paper.path({
+		"d": make_path(polygon.coordinates),
+		"strokeWidth": polygon.strokeWidth,
+		'stroke-linejoin': "round",
+		'stroke': polygon.strokeStyle,
+		"fill": pattern,
+	});
+
+	path.click(function(event) {
+	    //alert(polygon.image_src);
+        window.location.href=polygon.web_src;
+	});
+
+}
+
+function make_path() {
+	var d = "M";
+	var coordinates = arguments[0];
+	for (var i = 0; i < coordinates.length; i++) {
+		if (i == 0) {
+			d += coordinates[i][0] + " " + coordinates[i][1]
+		} else {
+			d += "L" + coordinates[i][0] + " " + coordinates[i][1]
+		}
+	}
+	return d + "z";
+	// return d;
+}
+</script>
+
+</body>
+</html>

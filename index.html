@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>个人主页测试版</title>
+    <script src="http://cdn.static.runoob.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+    <style type="text/css" >
+        body {
+            background-repeat:no-repeat;
+            background-attachment:scroll,fixed;
+            background-size:cover;
+            background-image: url(images/main.png) ;
+        }
+        #Yourname img
+        {
+            animation: A 15s linear 0s infinite;
+            margin-right: auto;
+            margin-left: auto;
+            display: block;
+            background-image: none;
+        }
+
+        @keyframes A {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+
+        .audio_play{
+            margin-top:2%;
+        }
+
+        hr{
+            clear: both;
+            width:30%;
+            border: 0;
+            height: 1px;
+            background: #333;
+            background-image: linear-gradient(to right, #ccc, #333, #ccc);
+            text-align: left;
+        }
+
+        #anime{
+            float:right;
+            position:relative;
+            animation:myfirst 20s ease-in-out 2s infinite alternate;
+        }
+        @keyframes myfirst
+        {
+            0%   {left:-400px; top:0px;opacity:0.2;}
+            10%  { left:-1200px; top:-200px;}
+            20%  { left:-600px; top:-550px;}
+            30%  {left:-0px; top:-400px;}
+            40%  {left:-600px;top:0px;}
+            50%  {left:-1200px;top:-300px;}
+            60%  {left:-700px;top:-550px;}
+            70%  {left:-300px;top:0px;}
+            80%  {left:-0px;top:-300px;}
+            90%  {left:-200px;top:-550px;}
+            100% { left:-400px; top:0px;opacity:1;}
+        }
+        #anime:hover{
+            animation-play-state:paused;
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="myaudio" loop=true>
+        <source src=" audio/zio.mp3" type="audio/mp3">
+        您的浏览器不支持 audio 元素。
+    </audio>
+    <div style="width:80px; height:80px; border-radius:50%; overflow:hidden;float:left;background-position:center;"><img src="images/rain.jpg"></div>
+    <input class="audio_play" type="image" src="images\play47.png"onclick="enableAutoplay()" width="50px";height="50px";>
+    <input class="audio_play" type="image" src="images\music119.png"onclick="disableAutoplay()" width="50px";height="50px";><br />
+    <script>
+        myaud=document.getElementById("myaudio");
+        function enableAutoplay(){
+            myaud.autoplay=true;
+            myaud.load();
+        }
+        function disableAutoplay(){
+            myaud.autoplay=false;
+            myaud.load();
+        }
+    </script>
+    <h1 style="text-align:center; text-shadow:4px 4px 20px green;color:white;"> &lt 仮面 Rider &gt <small>--<abbr title="X-Cross" style="cursor:help;">X</abbr></small><h1>
+    <hr>
+    <div id="Yourname"><img src="images/toplogo.png"></div>
+    <div style="padding:10px 40px; width:30%;resize:both;overflow:hidden;font-size:1.5em;text-align:right;" onclick="countDown(3,'index_n.html')">
+        进入世界<span id="jumpTo"></span>
+    </div>
+        <script type="text/javascript">
+            function countDown(secs,surl){
+                //alert(surl);
+                var jumpTo = document.getElementById('jumpTo');
+                jumpTo.innerHTML=","+secs+"s";
+                if(--secs>0){
+                    setTimeout("countDown("+secs+",'"+surl+"')",1000);
+                }
+                else{
+                    location.href=surl;
+                }
+            }
+
+            window.onload = function() {
+                var w = window.innerWidth;
+                var h = window.innerHeight;
+            }
+        </script>
+        <div id="anime"><img src="images/buli.png" style="opacity:0.5"></div>
+
+</body>
+</html>
